@@ -1,0 +1,498 @@
+:root {
+    --active-input-border: linear-gradient(90deg, rgba(96, 71, 255, 1) 0%, rgba(102, 0, 153, 1) 100%);
+    --input-error: hsl(0, 100%, 66%);
+    --white-clr: hsl(0, 0%, 100%);
+    --secondary-clr: hsl(270, 3%, 87%);
+    --border-clr: hsl(279, 6%, 55%);
+    --primary-clr: hsl(278, 68%, 11%);
+}
+
+html {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    color: var(--primary-clr);
+    min-height: 100vh;
+    min-width: 18rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.thank-you-page {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 1rem 2rem 1rem;
+}
+
+.thank-you-page img {
+    height: 4rem;
+    width: 4rem;
+    animation: 300ms thankYouAnimation;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    padding-top: 1.75rem;
+    animation: 800ms thankYouLetters;
+}
+
+.thank-you-page p {
+    color: var(--border-clr);
+    padding-top: 1.25rem;
+}
+
+.thank-you-page button {
+    width: 100%;
+    margin-top: 2.75rem;
+}
+
+.card-preview {
+    background-image: url(images/bg-main-mobile.png);
+    background-size: cover;
+    height: 13.5rem;
+    color: var(--white-clr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-preview-back {
+    background-image: url(images/bg-card-back.png);
+    background-size: 100% 100%;
+    height: 8.75rem;
+    width: 16rem;
+    position: absolute;
+    top: 2rem;
+    margin-left: 3rem;
+    box-shadow: 8px 0px 22px -6px rgba(66, 68, 90, 1);
+    border-radius: 1rem;
+    transition: transform 300ms ease-in-out;
+    animation: 800ms cardLoad cubic-bezier(0.42, 0, 0.82, 1.58);
+}
+
+.card-preview-back p {
+    font-size: 0.65rem;
+    position: absolute;
+    top: 3.75rem;
+    right: 2rem;
+}
+
+.card-preview-front {
+    background-image: url(images/bg-card-front.png);
+    background-size: 100% 100%;
+    height: 8.75rem;
+    width: 16rem;
+    position: absolute;
+    top: 7rem;
+    z-index: 1;
+    padding: 1rem;
+    margin-right: 3rem;
+    box-shadow: 8px 0px 22px -6px rgba(66, 68, 90, 1);
+    border-radius: 1rem;
+    transition: transform 300ms ease-in-out;
+    animation: 500ms cardLoad cubic-bezier(0.42, 0, 0.82, 1.58);
+}
+
+.card-preview-front img {
+    height: 1.5rem;
+}
+
+.card-preview-front p {
+    padding-top: 1.5rem;
+    letter-spacing: 2.5px;
+}
+
+.card-owner {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
+
+form {
+    margin: 4.5rem 1rem 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    display: block;
+    padding-bottom: 0.5rem;
+}
+
+input {
+    color: var(--primary-clr);
+    border: 1px solid var(--secondary-clr);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+}
+
+input::placeholder {
+    color: var(--secondary-clr);
+}
+
+input:focus {
+    border: double 1px transparent;
+    border-radius: 0.5rem;
+    background-image: linear-gradient(white, white), linear-gradient(90deg, rgba(96, 71, 255, 1) 0%, rgba(102, 0, 153, 1) 100%);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-details-labels {
+    display: flex;
+    gap: 12%;
+}
+
+.card-details-inputs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.card-details-inputs>* {
+    margin-bottom: 0;
+}
+
+.card-details input {
+    display: inline;
+}
+
+.card-details input[name="exp-date"] {
+    width: 40%;
+}
+
+button {
+    color: var(--white-clr);
+    background-color: var(--primary-clr);
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-top: 1.5rem;
+    transition: background-color 100ms ease-in-out;
+}
+
+.input-error {
+    color: var(--input-error);
+    font-size: 0.65rem;
+    margin-bottom: 1rem;
+}
+
+.typing-animation {
+    animation: typingAnimation 100ms ease-in-out;
+}
+
+.input-errors-details {
+    display: grid;
+    grid-template-columns: 20% 20% 60%;
+    width: 90%;
+    gap: 5vw;
+}
+
+#bg-change {
+    position: absolute;
+    opacity: 0;
+    font-size: 0.75rem;
+    letter-spacing: normal;
+    top: 0;
+    right: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+
+@media (max-width: 350px) {
+    .card-preview-back {
+        margin: 0;
+    }
+
+    .card-preview-front {
+        margin: 0;
+    }
+}
+
+@media (max-width: 450px) {
+    .input-errors-details {
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    main {
+        flex-direction: row;
+    }
+
+    .card-preview {
+        background-image: url(images/bg-main-desktop.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        justify-content: center;
+        width: 30rem;
+        height: 100vh;
+        min-height: 30vh;
+    }
+
+    .card-preview-front {
+        background-size: 100% 100%;
+        height: 13.75rem;
+        width: 26.5rem;
+        top: auto;
+        bottom: 26rem;
+        left: 9.15rem;
+    }
+
+    .card-preview-front img {
+        height: 4.5rem;
+        padding: 1rem;
+    }
+
+    .card-preview-front p {
+        font-size: 1.6rem;
+        padding-top: 2rem;
+        padding-inline: 1rem
+    }
+
+    .card-owner p {
+        font-size: 0.75rem;
+        padding-bottom: 1rem;
+    }
+
+    .card-preview-back {
+        background-size: 100% 100%;
+        min-height: 13.75rem;
+        width: 25rem;
+        top: auto;
+        bottom: 10rem;
+        left: 11.15rem;
+    }
+
+    .card-preview-back p {
+        font-size: 1rem;
+        top: 6.15rem;
+        right: 3rem;
+    }
+
+    footer {
+        position: absolute;
+        width: 100%;
+        top: 0;
+    }
+
+    form {
+        padding-left: 26.1rem;
+        justify-content: center;
+        min-width: 60rem;
+        max-width: 60rem;
+    }
+
+    input {
+        width: 66%;
+    }
+
+    .card-details input[name="exp-date"] {
+        width: 13.8%;
+    }
+
+    .card-details-labels {
+        display: flex;
+        gap: 11%;
+    }
+
+    .card-details-inputs {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .card-details-inputs input[name="cvc"] {
+        width: 32.5%;
+        margin-left: 0.7rem;
+    }
+
+    button {
+        width: 67.5%;
+    }
+
+    .thank-you-page {
+        padding-left: 26.1rem;
+    }
+
+    .thank-you-page button {
+        width: 155%;
+    }
+
+    .cvc-error {
+        padding-left: 0.6rem;
+    }
+
+    .input-errors-details {
+        display: grid;
+        grid-template-columns: 20% 20% 60%;
+        width: 22rem;
+        gap: 0.8rem;
+    }
+
+    .modal-bg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.8);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 500ms;
+    }
+
+    .modal {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: var(--secondary-clr);
+        height: 10%;
+        width: 50%;
+        background-color: var(--primary-clr);
+        border-radius: 1rem;
+        margin-left: 30rem;
+    }
+
+    .modal input {
+        width: 50%;
+        background-color: var(--secondary-clr);
+    }
+
+    .modal label {
+        padding-left: 1rem;
+        padding-bottom: 0;
+    }
+
+    .modal button {
+        margin: 0;
+        margin-inline: 0.5rem;
+        border: 1px solid var(--secondary-clr);
+        width: 20%;
+    }
+
+    @media (max-width: 1350px) {
+        form {
+            padding-left: 35rem;
+        }
+
+        .input-error {
+            font-size: 0.5rem;
+        }
+
+        .input-errors-details {
+            display: grid;
+            grid-template-columns: 20% 20% 60%;
+            width: 16.5rem;
+            gap: 0.75rem;
+        }
+    }
+
+    @media (max-height:710px) {
+
+        main {
+            overflow: hidden;
+            background-image: url(images/bg-main-desktop.png);
+            background-position: 0% 100%;
+            background-size: 30rem;
+            background-repeat: no-repeat;
+        }
+
+        .card-preview {
+            background-image: none;
+        }
+
+        .card-preview-front {
+            top: 2rem;
+        }
+
+        .card-preview-back {
+            top: 10rem;
+        }
+    }
+}
+
+
+
+
+@media (hover: hover) {
+
+    .card-preview-back:hover,
+    .card-preview-front:hover {
+        transform: scale(1.1);
+    }
+
+    .card-preview-front:hover {
+        cursor: pointer;
+    }
+
+    .card-preview-front:hover #bg-change {
+        opacity: 1;
+    }
+
+    @keyframes cardLoad {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes thankYouAnimation {
+        0% {
+            transform: rotate(360deg)
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes thankYouLetters {
+        0% {
+            letter-spacing: -15px;
+        }
+
+        100% {
+            letter-spacing: 3px;
+        }
+    }
+
+    @keyframes typingAnimation {
+        0% {
+            transform: translateY(0.1rem)
+        }
+
+        100% {
+            transform: translateY(0)
+        }
+    }
+
+    button:hover {
+        cursor: pointer;
+        background-color: hsl(278, 68%, 31%)
+    }
+}
